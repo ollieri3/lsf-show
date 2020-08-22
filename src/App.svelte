@@ -7,7 +7,12 @@
         "https://www.reddit.com/api/v1/access_token",
         {
           method: "POST",
-          body: "grant_type=client_credentials",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Basic ${btoa("_0MV5Ob_rhGkJA:")}`,
+          },
+          body:
+            "grant_type=https%3A%2F%2Foauth.reddit.com%2Fgrants%2Finstalled_client&device_id=DO_NOT_TRACK_THIS_DEVICE",
         }
       );
       console.log("token", token);
