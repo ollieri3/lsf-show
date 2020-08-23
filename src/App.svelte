@@ -1,9 +1,11 @@
 <script>
-  const name = "world";
+  import { dataset_dev } from "svelte/internal";
+
+  let posts = [];
 
   async function fetchTopPosts() {
     try {
-      const token = await window.fetch(
+      const tokenResponse = await window.fetch(
         "https://www.reddit.com/api/v1/access_token",
         {
           method: "POST",
@@ -15,14 +17,29 @@
             "grant_type=https%3A%2F%2Foauth.reddit.com%2Fgrants%2Finstalled_client&device_id=DO_NOT_TRACK_THIS_DEVICE",
         }
       );
-      console.log("token", token);
+
+      const { access_token } = await tokenResponse.json();
+      const hotPosts = await window.fetch(
+        "https://oauth.reddit.com/r/LivestreamFail/hot",
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      );
+
+      const postsData = await hotPosts.json();
+      posts = postsData.data.children;
     } catch (error) {
       console.error(error);
     }
   }
 
-  function clicked() {
-    console.log("clicked!");
+  function grabClipSlug(clipUrl) {
+    const match = clipUrl.match(/twitch.tv\/(.*)/);
+    if (match && match[1]) {
+      return match[1];
+    }
   }
 </script>
 
@@ -50,5 +67,26 @@
 
 <main>
   <h1>LSF Show!</h1>
-  <button on:click={fetchTopPosts}>Fetch Posts</button>
+  <button on:click={fetchTopPosts}>Fetch posts</button>
+
+  {#each posts as post}
+    <div>
+      <p>{post.data.title}</p>
+
+      <!-- <iframe title="hi" width="500" height="500" src={post.data.url} /> -->
+
+      <iframe
+        title={post.data.title}
+        src="https://clips.twitch.tv/embed?clip={grabClipSlug(post.data.url)}&parent=lsf.show"
+        height="500"
+        width="500"
+        scrolling="no"
+        allowfullscreen="true"
+        frameborder="0" />
+
+    </div>
+  {:else}
+    <p>No Posts</p>
+  {/each}
+
 </main>
