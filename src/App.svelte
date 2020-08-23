@@ -77,13 +77,12 @@
 
       <iframe
         title={post.data.title}
-        src="https://clips.twitch.tv/embed?clip={grabClipSlug(post.data.url)}&parent=lsf.show"
+        src="https://clips.twitch.tv/embed?clip={grabClipSlug(post.data.url)}&parent=lsf.show&parent=lsf-show.netlify.app"
         height="500"
         width="500"
         scrolling="no"
         allowfullscreen="true"
         frameborder="0" />
-
     </div>
   {:else}
     <p>No Posts</p>
