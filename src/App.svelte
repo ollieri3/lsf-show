@@ -2,6 +2,7 @@
   import { dataset_dev } from "svelte/internal";
 
   let posts = [];
+  let cursor = 0;
 
   async function fetchTopPosts() {
     try {
@@ -41,51 +42,47 @@
       return match[1];
     }
   }
+
+  function handleKeys(event) {
+    // Right Arrow Key
+    if (event.keyCode === 39) {
+      // arrow right:
+      cursor = Math.min(cursor + 1, 24);
+    }
+    // Left Arrow Key
+    if (event.keyCode === 37) {
+      cursor = Math.max(cursor - 1, 0);
+    }
+  }
 </script>
 
 <style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
+  div {
+    width: 100%;
+    height: 75vh;
   }
 </style>
 
+<svelte:window on:keydown={handleKeys} />
+
 <main>
+
   <h1>LSF Show!</h1>
   <button on:click={fetchTopPosts}>Fetch posts</button>
+  <p>Cursor: {cursor}</p>
 
-  {#each posts as post}
+  {#if posts[cursor]}
     <div>
-      <p>{post.data.title}</p>
-
-      <!-- <iframe title="hi" width="500" height="500" src={post.data.url} /> -->
-
+      <p>{posts[cursor].data.title}</p>
       <iframe
-        title={post.data.title}
-        src="https://clips.twitch.tv/embed?clip={grabClipSlug(post.data.url)}&parent=lsf.show&parent=lsf-show.netlify.app"
-        height="500"
-        width="500"
+        title={posts[cursor].data.title}
+        src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay=true"
+        height="100%"
+        width="100%"
         scrolling="no"
         allowfullscreen="true"
         frameborder="0" />
     </div>
-  {:else}
-    <p>No Posts</p>
-  {/each}
+  {/if}
 
 </main>
