@@ -1,8 +1,10 @@
 <script>
-  import { dataset_dev } from "svelte/internal";
+  import Header from "./Header.svelte";
 
   let posts = [];
   let cursor = 0;
+
+  fetchTopPosts();
 
   async function fetchTopPosts() {
     try {
@@ -57,18 +59,20 @@
 </script>
 
 <style>
+  main {
+    padding: 0 16px;
+  }
+
   div {
-    width: 100%;
+    margin: auto;
+    max-width: 1235px;
     height: 75vh;
   }
 </style>
 
 <svelte:window on:keydown={handleKeys} />
-
+<Header />
 <main>
-
-  <h1>LSF Show!</h1>
-  <button on:click={fetchTopPosts}>Fetch posts</button>
   <p>Cursor: {cursor}</p>
 
   {#if posts[cursor]}
