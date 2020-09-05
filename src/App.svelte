@@ -1,5 +1,6 @@
 <script>
   import Header from "./Header.svelte";
+  import { authenticate, getHotPosts } from "./redditService";
 
   let posts = [];
   let cursor = 0;
@@ -8,31 +9,9 @@
 
   async function fetchTopPosts() {
     try {
-      const tokenResponse = await window.fetch(
-        "https://www.reddit.com/api/v1/access_token",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: `Basic ${btoa("_0MV5Ob_rhGkJA:")}`,
-          },
-          body:
-            "grant_type=https%3A%2F%2Foauth.reddit.com%2Fgrants%2Finstalled_client&device_id=DO_NOT_TRACK_THIS_DEVICE",
-        }
-      );
-
-      const { access_token } = await tokenResponse.json();
-      const hotPosts = await window.fetch(
-        "https://oauth.reddit.com/r/LivestreamFail/hot",
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        }
-      );
-
-      const postsData = await hotPosts.json();
-      posts = postsData.data.children;
+      const accessToken = await authenticate();
+      posts = await getHotPosts(accessToken);
+      console.log(posts);
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +56,10 @@
 
   {#if posts[cursor]}
     <div>
-      <p>{posts[cursor].data.title}</p>
+      <a
+        href={`https://reddit.com${posts[cursor].data.permalink}`}
+        target="_blank"
+        rel="noopener noreferrer">{posts[cursor].data.title}</a>
       <iframe
         title={posts[cursor].data.title}
         src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay=true"
@@ -88,5 +70,4 @@
         frameborder="0" />
     </div>
   {/if}
-
 </main>
