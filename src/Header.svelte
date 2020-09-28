@@ -1,7 +1,11 @@
+<script>
+  import logo from "../public/lsfshowicon.svg"
+
+</script>
+
 <style>
   header {
     min-height: 80px;
-    background-color: #3c1158;
     padding: 8px 16px;
     display: flex;
     align-items: center;
@@ -41,6 +45,9 @@
 </style>
 
 <header>
+
+  <img alt="The lsf.show logo, a small box television" src={logo} width="67" height="83"/>
+
   <a href="/">
     <h1>LSF Show</h1>
   </a>
