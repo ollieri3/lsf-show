@@ -44,7 +44,7 @@
 
   div {
     margin: auto;
-    max-width: 1235px;
+    max-width: 1150px;
     height: 75vh;
   }
 
