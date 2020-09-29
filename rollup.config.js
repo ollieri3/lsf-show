@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import image from '@rollup/plugin-image';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -71,7 +72,11 @@ export default {
 		production && terser(),
 
 		//Allows the importing of images (png, svg. etc)
-		image()
+		image(),
+
+		replace({
+			__isProd__: production
+		})
 	],
 	watch: {
 		clearScreen: false

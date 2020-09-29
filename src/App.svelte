@@ -62,7 +62,7 @@
         rel="noopener noreferrer">{posts[cursor].data.title}</a>
       <iframe
         title={posts[cursor].data.title}
-        src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay=true"
+        src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay={__isProd__}"
         height="100%"
         width="100%"
         scrolling="no"
