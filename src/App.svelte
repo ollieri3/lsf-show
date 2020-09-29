@@ -52,8 +52,6 @@
 <svelte:window on:keydown={handleKeys} />
 <Header />
 <main>
-  <p>Cursor: {cursor}</p>
-
   {#if posts[cursor]}
     <div>
       <a
