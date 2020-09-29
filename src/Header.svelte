@@ -6,7 +6,7 @@
 <style>
   header {
     min-height: 80px;
-    padding: 8px 16px;
+    padding: 20px 25px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -24,12 +24,6 @@
     text-decoration: none;
   }
 
-  .info {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-  }
-
   .branding {
     display: flex;
     align-items: center;
@@ -37,6 +31,33 @@
 
   .branding img {
     margin-right: 10px;
+  }
+
+  .shortcuts {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    border: 1px solid #707070;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #383838;
+    width: 290px;
+  }
+
+  .shortcuts h3 {
+    padding: 8px;
+    margin: 0;
+    background: #FFFFFF;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color:black;
+    font-size: 16px;
+  }
+
+  .shortcuts p {
+    margin: 0;
+    padding: 16px 8px;
+    font-weight: bold;
   }
 
   kbd {
@@ -53,6 +74,10 @@
     padding: 2px 4px;
     white-space: nowrap;
   }
+
+  kbd:nth-child(2) {
+    margin-right: 6px;
+  }
 </style>
 
 <header>
@@ -65,13 +90,12 @@
   </div>
 
 
-  <div class="info">
+  <div class="shortcuts">
+    <h3>Shortcuts</h3>
     <p>
-      Use
       <kbd>&larr;</kbd>
-      and
       <kbd>&rarr;</kbd>
-      arrow keys to navigate
+      Previous / Next clip
     </p>
   </div>
 
