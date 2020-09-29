@@ -61,6 +61,13 @@
     fill: white;
   }
 
+  iframe {
+    background-color: #383838;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(145,71,255,1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(145,71,255,1);
+    box-shadow: 0px 0px 5px 0px rgba(145,71,255,1);  
+  }
+
 </style>
 
 <svelte:window on:keydown={handleKeys} />
