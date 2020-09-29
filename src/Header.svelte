@@ -15,6 +15,8 @@
 
   h1 {
     margin: 0;
+    font-weight: bold;
+    font-size: 28px;
   }
 
   a {
@@ -26,6 +28,15 @@
     display: flex;
     align-items: center;
     font-size: 16px;
+  }
+
+  .branding {
+    display: flex;
+    align-items: center;
+  }
+
+  .branding img {
+    margin-right: 10px;
   }
 
   kbd {
@@ -46,11 +57,13 @@
 
 <header>
 
-  <img alt="The lsf.show logo, a small box television" src={logo} width="67" height="83"/>
+  <div class="branding">
+    <img alt="The lsf.show logo, a small box television" src={logo} width="67" height="83"/>
+    <a href="/">
+      <h1>lsf.show</h1>
+    </a>
+  </div>
 
-  <a href="/">
-    <h1>LSF Show</h1>
-  </a>
 
   <div class="info">
     <p>
