@@ -10,8 +10,8 @@
   async function fetchTopPosts() {
     try {
       const accessToken = await authenticate();
-      posts = await getHotPosts(accessToken);
-      console.log(posts);
+      const unfilteredPosts = await getHotPosts(accessToken);
+      posts = unfilteredPosts.filter(post => post.data.url.match(/twitch.tv\/(.*)/));
     } catch (error) {
       console.error(error);
     }
