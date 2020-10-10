@@ -40,15 +40,25 @@
 </script>
 
 <style>
-  main {
-    padding: 0 16px;
+  .page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
-  div {
-    margin: auto;
-    max-width: 1150px;
-    height: 75vh;
+  main {
+    padding: 0 16px;
+    flex-grow: 1;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
+
+  /*TODO: Save this for desktop iframe size*/
+  /* max-width: 1150px;
+  height: 75vh; */
 
   div a {
     display: flex;
@@ -68,14 +78,16 @@
     -webkit-box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
     -moz-box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
     box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
+    height: 75%;
   }
 </style>
 
 <svelte:window on:keydown={handleKeys} />
-<Header />
-<main>
-  {#if posts[cursor]}
-    <div>
+
+<div class="page">
+  <Header />
+  <main>
+    {#if posts[cursor]}
       <a
         href={`https://reddit.com${posts[cursor].data.permalink}`}
         target="_blank"
@@ -89,11 +101,9 @@
       <iframe
         title={posts[cursor].data.title}
         src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay={__isProd__}"
-        height="100%"
-        width="100%"
         scrolling="no"
         allowfullscreen="true"
         frameborder="0" />
-    </div>
-  {/if}
-</main>
+    {/if}
+  </main>
+</div>
