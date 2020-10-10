@@ -24,8 +24,8 @@
     color: white;
     border: 0;
     height: 50px;
-    border: 1px solid #413f43;
     max-width: 50%;
+    margin: 1px;
   }
 </style>
 
