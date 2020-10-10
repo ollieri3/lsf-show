@@ -11,7 +11,9 @@
     try {
       const accessToken = await authenticate();
       const unfilteredPosts = await getHotPosts(accessToken);
-      posts = unfilteredPosts.filter(post => post.data.url.match(/twitch.tv\/(.*)/));
+      posts = unfilteredPosts.filter((post) =>
+        post.data.url.match(/twitch.tv\/(.*)/)
+      );
     } catch (error) {
       console.error(error);
     }
@@ -48,7 +50,7 @@
     height: 75vh;
   }
 
-  div a  {
+  div a {
     display: flex;
     align-items: center;
     padding: 6px 0;
@@ -63,11 +65,10 @@
 
   iframe {
     background-color: #383838;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(145,71,255,1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(145,71,255,1);
-    box-shadow: 0px 0px 5px 0px rgba(145,71,255,1);  
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
+    box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
   }
-
 </style>
 
 <svelte:window on:keydown={handleKeys} />
@@ -78,7 +79,13 @@
       <a
         href={`https://reddit.com${posts[cursor].data.permalink}`}
         target="_blank"
-        rel="noopener noreferrer">{posts[cursor].data.title}<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path class="heroicon-ui" d="M19 6.41L8.7 16.71a1 1 0 1 1-1.4-1.42L17.58 5H14a1 1 0 0 1 0-2h6a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V6.41zM17 14a1 1 0 0 1 2 0v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7c0-1.1.9-2 2-2h5a1 1 0 0 1 0 2H5v12h12v-5z"/></svg></a>
+        rel="noopener noreferrer">{posts[cursor].data.title}<svg
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"><path
+            class="heroicon-ui"
+            d="M19 6.41L8.7 16.71a1 1 0 1 1-1.4-1.42L17.58 5H14a1 1 0 0 1 0-2h6a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V6.41zM17 14a1 1 0 0 1 2 0v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7c0-1.1.9-2 2-2h5a1 1 0 0 1 0 2H5v12h12v-5z" /></svg></a>
       <iframe
         title={posts[cursor].data.title}
         src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay={__isProd__}"
