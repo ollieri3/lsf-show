@@ -50,7 +50,6 @@
 
 <style>
   .page {
-    height: 100vh;
     display: flex;
     flex-direction: column;
   }
@@ -91,7 +90,7 @@
 
 <svelte:window on:keydown={handleKeys} />
 
-<div class="page">
+<div class="page" style="height: {window.innerHeight}px">
   <Header />
   <main>
     {#if posts[cursor]}
