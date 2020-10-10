@@ -23,7 +23,7 @@
     background-color: rgba(145, 71, 255, 1);
     color: white;
     border: 0;
-    height: 42px;
+    height: 50px;
     border: 1px solid #413f43;
     max-width: 50%;
   }
