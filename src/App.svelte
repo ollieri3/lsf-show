@@ -1,5 +1,6 @@
 <script>
   import Header from "./Header.svelte";
+  import MobileControls from "./MobileControls.svelte";
   import { authenticate, getHotPosts } from "./redditService";
 
   let posts = [];
@@ -26,15 +27,23 @@
     }
   }
 
+  function goToNextClip() {
+    cursor = Math.min(cursor + 1, 24);
+  }
+
+  function goToPreviousClip() {
+    cursor = Math.max(cursor - 1, 0);
+  }
+
   function handleKeys(event) {
     // Right Arrow Key
     if (event.keyCode === 39) {
       // arrow right:
-      cursor = Math.min(cursor + 1, 24);
+      goToNextClip();
     }
     // Left Arrow Key
     if (event.keyCode === 37) {
-      cursor = Math.max(cursor - 1, 0);
+      goToPreviousClip();
     }
   }
 </script>
@@ -49,10 +58,8 @@
   main {
     padding: 0 16px;
     flex-grow: 1;
-    margin: 10px 0;
+    margin: 25px 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
   }
 
@@ -106,4 +113,8 @@
         frameborder="0" />
     {/if}
   </main>
+
+  <MobileControls
+    on:nextClip={goToNextClip}
+    on:previousClip={goToPreviousClip} />
 </div>
