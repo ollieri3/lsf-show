@@ -25,7 +25,21 @@
     border: 0;
     height: 50px;
     max-width: 50%;
-    margin: 1px;
+    margin: 2px 1px;
+  }
+
+  .control:nth-child(1) {
+    margin-left: 2px;
+  }
+
+  .control:nth-child(2) {
+    margin-right: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .controls {
+      display: none;
+    }
   }
 </style>
 

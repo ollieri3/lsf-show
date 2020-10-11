@@ -55,16 +55,12 @@
   }
 
   main {
-    padding: 0 16px;
+    padding: 0 8px;
     flex-grow: 1;
     margin: 25px 0;
     display: flex;
     flex-direction: column;
   }
-
-  /*TODO: Save this for desktop iframe size*/
-  /* max-width: 1150px;
-  height: 75vh; */
 
   div a {
     display: flex;
@@ -84,7 +80,28 @@
     -webkit-box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
     -moz-box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
     box-shadow: 0px 0px 5px 0px rgba(145, 71, 255, 1);
-    height: 75%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .clip-card {
+    max-width: 1150px;
+    max-height: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    main {
+      padding: 0 16px;
+      margin: 0;
+    }
+
+    .clip-card {
+      max-height: 75vh;
+    }
   }
 </style>
 
@@ -94,22 +111,24 @@
   <Header />
   <main>
     {#if posts[cursor]}
-      <a
-        href={`https://reddit.com${posts[cursor].data.permalink}`}
-        target="_blank"
-        rel="noopener noreferrer">{posts[cursor].data.title}<svg
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-          xmlns="http://www.w3.org/2000/svg"><path
-            class="heroicon-ui"
-            d="M19 6.41L8.7 16.71a1 1 0 1 1-1.4-1.42L17.58 5H14a1 1 0 0 1 0-2h6a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V6.41zM17 14a1 1 0 0 1 2 0v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7c0-1.1.9-2 2-2h5a1 1 0 0 1 0 2H5v12h12v-5z" /></svg></a>
-      <iframe
-        title={posts[cursor].data.title}
-        src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay={__isProd__}"
-        scrolling="no"
-        allowfullscreen="true"
-        frameborder="0" />
+      <div class="clip-card">
+        <a
+          href={`https://reddit.com${posts[cursor].data.permalink}`}
+          target="_blank"
+          rel="noopener noreferrer">{posts[cursor].data.title}<svg
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"><path
+              class="heroicon-ui"
+              d="M19 6.41L8.7 16.71a1 1 0 1 1-1.4-1.42L17.58 5H14a1 1 0 0 1 0-2h6a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V6.41zM17 14a1 1 0 0 1 2 0v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7c0-1.1.9-2 2-2h5a1 1 0 0 1 0 2H5v12h12v-5z" /></svg></a>
+        <iframe
+          title={posts[cursor].data.title}
+          src="https://clips.twitch.tv/embed?clip={grabClipSlug(posts[cursor].data.url)}&parent=lsf.show&parent=lsf-show.netlify.app&parent=localhost&autoplay={__isProd__}"
+          scrolling="no"
+          allowfullscreen="true"
+          frameborder="0" />
+      </div>
     {/if}
   </main>
 
