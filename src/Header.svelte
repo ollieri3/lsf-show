@@ -1,22 +1,21 @@
 <script>
-  import logo from "../public/lsfshowicon.svg"
-
+  import logo from "../public/lsfshowicon.svg";
 </script>
 
 <style>
   header {
-    min-height: 80px;
-    padding: 20px 25px;
+    min-height: 55px;
+    padding: 8px 10px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   h1 {
     margin: 0;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 18px;
   }
 
   a {
@@ -31,10 +30,11 @@
 
   .branding img {
     margin-right: 10px;
+    width: 32px;
   }
 
   .shortcuts {
-    display: flex;
+    display: none;
     flex-direction: column;
     font-size: 16px;
     border: 1px solid #707070;
@@ -47,10 +47,10 @@
   .shortcuts h3 {
     padding: 8px;
     margin: 0;
-    background: #FFFFFF;
+    background: #ffffff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    color:black;
+    color: black;
     font-size: 16px;
   }
 
@@ -78,25 +78,39 @@
   kbd:nth-child(2) {
     margin-right: 6px;
   }
+
+  /* Tablet upwards */
+  @media (min-width: 768px) {
+    header {
+      justify-content: space-between;
+      padding: 20px 25px;
+    }
+
+    .branding h1 {
+      font-size: 28px;
+    }
+
+    .branding img {
+      width: 67px;
+      height: 83px;
+    }
+
+    .shortcuts {
+      display: flex;
+    }
+  }
 </style>
 
 <header>
-
   <div class="branding">
-    <img alt="The lsf.show logo, a small box television" src={logo} width="67" height="83"/>
+    <img alt="The lsf.show logo, a small box television" src={logo} />
     <a href="/">
       <h1>lsf.show</h1>
     </a>
   </div>
 
-
   <div class="shortcuts">
     <h3>Shortcuts</h3>
-    <p>
-      <kbd>&larr;</kbd>
-      <kbd>&rarr;</kbd>
-      Previous / Next clip
-    </p>
+    <p><kbd>&larr;</kbd> <kbd>&rarr;</kbd> Previous / Next clip</p>
   </div>
-
 </header>
