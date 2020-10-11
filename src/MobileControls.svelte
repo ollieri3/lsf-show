@@ -3,10 +3,12 @@
   const dispatch = createEventDispatcher();
 
   function handleNextClip() {
+    window.navigator.vibrate(200);
     dispatch("nextClip");
   }
 
   function handlePreviousClip() {
+    window.navigator.vibrate(200);
     dispatch("previousClip");
   }
 </script>
