@@ -85,7 +85,7 @@
   }
 
   .clip-card {
-    max-width: 1150px;
+    max-width: 1500px;
     max-height: 50vh;
     margin-left: auto;
     margin-right: auto;
