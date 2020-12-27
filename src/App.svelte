@@ -40,6 +40,10 @@
     cursor = Math.max(cursor - 1, 0);
   }
 
+  function openClipInReddit() {
+    window.open(`https://reddit.com${posts[cursor].data.permalink}`, "_blank");
+  }
+
   function handleKeys(event) {
     // Right Arrow Key
     if (event.keyCode === 39) {
@@ -49,6 +53,10 @@
     // Left Arrow Key
     if (event.keyCode === 37) {
       goToPreviousClip();
+    }
+    // Top Arrow Key
+    if (event.keyCode === 38) {
+      openClipInReddit();
     }
   }
 </script>

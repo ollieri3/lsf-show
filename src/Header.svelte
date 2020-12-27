@@ -56,7 +56,8 @@
 
   .shortcuts p {
     margin: 0;
-    padding: 16px 8px;
+    margin-left: 6px;
+    padding: 8px 8px;
     font-weight: bold;
   }
 
@@ -73,10 +74,6 @@
     line-height: 1;
     padding: 2px 4px;
     white-space: nowrap;
-  }
-
-  kbd:nth-child(2) {
-    margin-right: 6px;
   }
 
   /* Tablet upwards */
@@ -112,5 +109,6 @@
   <div class="shortcuts">
     <h3>Shortcuts</h3>
     <p><kbd>&larr;</kbd> <kbd>&rarr;</kbd> Previous / Next clip</p>
+    <p><kbd>&uarr;</kbd> Open in Reddit</p>
   </div>
 </header>
