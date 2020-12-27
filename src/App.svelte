@@ -3,6 +3,8 @@
   import MobileControls from "./MobileControls.svelte";
   import { authenticate, getHotPosts } from "./redditService";
 
+  const MAX_POSTS = 24;
+
   let posts = [];
   let cursor = 0;
 
@@ -11,10 +13,13 @@
   async function fetchTopPosts() {
     try {
       const accessToken = await authenticate();
-      const unfilteredPosts = await getHotPosts(accessToken);
-      posts = unfilteredPosts.filter((post) =>
-        post.data.url.match(/twitch.tv\/(.*)/)
-      );
+      while (posts.length < MAX_POSTS) {
+        const unfilteredPosts = await getHotPosts(accessToken);
+        const postsWithClips = unfilteredPosts.filter((post) =>
+          post.data.url.match(/twitch.tv\/(.*)/)
+        );
+        posts = [...posts, ...postsWithClips];
+      }
     } catch (error) {
       console.error(error);
     }
@@ -28,7 +33,7 @@
   }
 
   function goToNextClip() {
-    cursor = Math.min(cursor + 1, 24);
+    cursor = Math.min(cursor + 1, MAX_POSTS);
   }
 
   function goToPreviousClip() {
