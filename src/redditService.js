@@ -13,13 +13,16 @@ export function authenticate() {
     .then((json) => json.access_token);
 }
 
-export function getHotPosts(accessToken) {
+export function getHotPosts(accessToken, afterPostId = null) {
   return window
-    .fetch("https://oauth.reddit.com/r/LivestreamFail/hot", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
+    .fetch(
+      `https://oauth.reddit.com/r/LivestreamFail/hot?after=${afterPostId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    )
     .then((resp) => resp.json())
     .then((json) => json.data.children);
 }

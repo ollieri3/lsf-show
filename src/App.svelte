@@ -14,7 +14,11 @@
     try {
       const accessToken = await authenticate();
       while (posts.length < MAX_POSTS) {
-        const unfilteredPosts = await getHotPosts(accessToken);
+        const lastPost = posts.length ? posts[posts.length - 1] : null;
+        const unfilteredPosts = await getHotPosts(
+          accessToken,
+          lastPost ? `${lastPost.kind}_${lastPost.data.id}` : null
+        );
         const postsWithClips = unfilteredPosts.filter((post) =>
           post.data.url.match(/twitch.tv\/(.*)/)
         );
